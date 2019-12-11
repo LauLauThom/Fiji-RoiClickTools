@@ -16,6 +16,58 @@ function goNextSlice(){
 	if ((slices>1) && (nextSlice)) run("Next Slice [>]");
 }
 
+
+// -------------- Line  --------------- //
+
+// Initalize variables (global such that the option macro can change it)
+var lineLength  = 20;
+var lineAngle  = 45; // trigo orientation
+ 
+macro "Line clic Tool - Cf00Lff11" {
+	roiManager("Associate", "true"); // associate ROI with slice
+	roiManager("Show All with labels");	
+	
+	getCursorLoc(xcenter, ycenter, z, flags); 
+	//print("Sample: "+x+" "+y); 
+
+	if ((flags==16)|(flags == 48)){  // 16 : left click or 48 = 16 + 32 Left-click + in a ROI
+		x1 = xcenter - cos(PI/180 * lineAngle) * lineLength/2;
+		y1 = ycenter + sin(PI/180 * lineAngle) * lineLength/2;
+		
+		x2 = xcenter + cos(PI/180 * lineAngle) * lineLength/2;
+		y2 = ycenter - sin(PI/180 * lineAngle) * lineLength/2;
+
+		makeLine(x1, y1, x2, y2);
+		
+		if (addToManager) roiManager("Add");
+		if (runMeasure) run("Measure");
+		goNextSlice();         // only if nextSlice is True
+		
+		run("Select None");   // Deselect last drawn ROI
+	}
+}	
+
+
+macro "Line clic Tool Options" { 
+	Dialog.create("Line clic tool options");
+	Dialog.addNumber("Length: ", lineLength);
+	Dialog.addNumber("Angle (counter-clockwise): ", lineAngle);
+
+	
+	Dialog.addCheckbox("Add to Roi Manager", addToManager);
+	Dialog.addCheckbox("Run measure", runMeasure );
+	Dialog.addCheckbox("Auto-Next slice", nextSlice);
+	Dialog.show();
+	
+	lineLength  = Dialog.getNumber();
+	lineAngle   = Dialog.getNumber();
+	
+	addToManager = Dialog.getCheckbox();
+	runMeasure   = Dialog.getCheckbox();
+	nextSlice    = Dialog.getCheckbox();
+}
+
+
 // -------------------- Circle ---------------- //
 var radius = 20; 
 
@@ -84,8 +136,8 @@ macro "Rectangle clic Tool - Cf00R11cc" {
 
 macro "Rectangle clic Tool Options" { 
 	Dialog.create("Rectangle clic tool options");
-	Dialog.addNumber("Width: ", width);
-	Dialog.addNumber("Height: ", height);
+	Dialog.addNumber("Width: ", rectWidth);
+	Dialog.addNumber("Height: ", rectHeight);
 	
 	Dialog.addCheckbox("Add to Roi Manager", addToManager);
 	Dialog.addCheckbox("Run measure", runMeasure );
@@ -102,3 +154,110 @@ macro "Rectangle clic Tool Options" {
 
 
 // -------------- Rotated Rectangle --------------- //
+
+// Initalize variables (global such that the option macro can change it)
+var rotRectWidth  = 10;
+var rotRectHeight = 10;
+var rotRectAngle  = 45; // trigo orientation
+ 
+macro "Rotated Rectangle clic Tool - Cf00R11cc" {
+	roiManager("Associate", "true"); // associate ROI with slice
+	roiManager("Show All with labels");	
+	
+	getCursorLoc(xcenter, ycenter, z, flags); 
+	//print("Sample: "+x+" "+y); 
+
+	if ((flags==16)|(flags == 48)){  // 16 : left click or 48 = 16 + 32 Left-click + in a ROI
+		x1 = xcenter - cos(PI/180 * rotRectAngle) * rotRectWidth/2;
+		y1 = ycenter + sin(PI/180 * rotRectAngle) * rotRectWidth/2;
+		
+		x2 = xcenter + cos(PI/180 * rotRectAngle) * rotRectWidth/2;
+		y2 = ycenter - sin(PI/180 * rotRectAngle) * rotRectWidth/2;
+
+		makeRotatedRectangle(x1, y1, x2, y2, rotRectHeight);
+		
+		if (addToManager) roiManager("Add");
+		if (runMeasure) run("Measure");
+		goNextSlice();         // only if nextSlice is True
+		
+		run("Select None");   // Deselect last drawn ROI
+	}
+}	
+
+
+macro "Rotated Rectangle clic Tool Options" { 
+	Dialog.create("Rotated Rectangle clic tool options");
+	Dialog.addNumber("Width: ", rotRectWidth);
+	Dialog.addNumber("Height: ", rotRectHeight);
+	Dialog.addNumber("Angle (counter-clockwise): ", rotRectAngle);
+
+	
+	Dialog.addCheckbox("Add to Roi Manager", addToManager);
+	Dialog.addCheckbox("Run measure", runMeasure );
+	Dialog.addCheckbox("Auto-Next slice", nextSlice);
+	Dialog.show();
+	
+	rotRectWidth  = Dialog.getNumber();
+	rotRectHeight = Dialog.getNumber();
+	rotRectAngle  = Dialog.getNumber();
+	
+	addToManager = Dialog.getCheckbox();
+	runMeasure   = Dialog.getCheckbox();
+	nextSlice    = Dialog.getCheckbox();
+}
+
+
+
+// -------------- Ellipse  --------------- //
+
+// Initalize variables (global such that the option macro can change it)
+var ellipseWidth  = 20;
+var ellipseHeight = 10;
+var ellipseAngle  = 45; // trigo orientation
+ 
+macro "Ellipse clic Tool - Cf00O11fa" {
+	roiManager("Associate", "true"); // associate ROI with slice
+	roiManager("Show All with labels");	
+	
+	getCursorLoc(xcenter, ycenter, z, flags); 
+	//print("Sample: "+x+" "+y); 
+
+	if ((flags==16)|(flags == 48)){  // 16 : left click or 48 = 16 + 32 Left-click + in a ROI
+		x1 = xcenter - cos(PI/180 * ellipseAngle) * ellipseWidth/2;
+		y1 = ycenter + sin(PI/180 * ellipseAngle) * ellipseWidth/2;
+		
+		x2 = xcenter + cos(PI/180 * ellipseAngle) * ellipseWidth/2;
+		y2 = ycenter - sin(PI/180 * ellipseAngle) * ellipseWidth/2;
+
+		makeEllipse(x1, y1, x2, y2, ellipseHeight/ellipseWidth);
+		
+		if (addToManager) roiManager("Add");
+		if (runMeasure) run("Measure");
+		goNextSlice();         // only if nextSlice is True
+		
+		run("Select None");   // Deselect last drawn ROI
+	}
+}	
+
+
+macro "Ellipse clic Tool Options" { 
+	Dialog.create("Ellipse clic tool options");
+	Dialog.addNumber("Width: ", ellipseWidth);
+	Dialog.addNumber("Height: ", ellipseHeight);
+	Dialog.addNumber("Angle (counter-clockwise): ", ellipseAngle);
+
+	
+	Dialog.addCheckbox("Add to Roi Manager", addToManager);
+	Dialog.addCheckbox("Run measure", runMeasure );
+	Dialog.addCheckbox("Auto-Next slice", nextSlice);
+	Dialog.show();
+	
+	ellipseWidth  = Dialog.getNumber();
+	ellipseHeight = Dialog.getNumber();
+	ellipseAngle  = Dialog.getNumber();
+	
+	addToManager = Dialog.getCheckbox();
+	runMeasure   = Dialog.getCheckbox();
+	nextSlice    = Dialog.getCheckbox();
+}
+
