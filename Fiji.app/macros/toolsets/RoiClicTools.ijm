@@ -17,6 +17,10 @@ function goNextSlice(){
 }
 
 
+// -------------- Point  --------------- //
+//Not provided already available in built-in imageJ
+
+
 // -------------- Line  --------------- //
 
 // Initalize variables (global such that the option macro can change it)
