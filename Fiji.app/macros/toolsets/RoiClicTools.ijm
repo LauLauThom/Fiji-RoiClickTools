@@ -57,8 +57,8 @@ macro "Circle clic Tool Options" {
 // ------------------ Rectangle ------------------------- //
 
 // Initalize variables (global such that the option macro can change it)
-var width  = 10;
-var height = 10;
+var rectWidth  = 10;
+var rectHeight = 10;
 
 macro "Rectangle clic Tool - Cf00R11cc" {
 	roiManager("Associate", "true"); // associate ROI with slice
@@ -71,7 +71,7 @@ macro "Rectangle clic Tool - Cf00R11cc" {
 		xcorner = xcenter - width/2;
 		ycorner = ycenter - height/2;
 		
-		makeRectangle(xcorner, ycorner, width, height); // Create a rectangular Roi centered on the point clicked
+		makeRectangle(xcorner, ycorner, rectWidth, rectHeight); // Create a rectangular Roi centered on the point clicked
 		
 		if (addToManager) roiManager("Add");
 		if (runMeasure) run("Measure");
@@ -92,11 +92,13 @@ macro "Rectangle clic Tool Options" {
 	Dialog.addCheckbox("Auto-Next slice", nextSlice);
 	Dialog.show();
 	
-	width  = Dialog.getNumber();
-	height = Dialog.getNumber();
+	rectWidth  = Dialog.getNumber();
+	rectHeight = Dialog.getNumber();
 	
 	addToManager = Dialog.getCheckbox();
 	runMeasure   = Dialog.getCheckbox();
 	nextSlice    = Dialog.getCheckbox();
 }
-  
+
+
+// -------------- Rotated Rectangle --------------- //
