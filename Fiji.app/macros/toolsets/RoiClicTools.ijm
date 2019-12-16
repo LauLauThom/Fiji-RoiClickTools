@@ -22,7 +22,7 @@ function addDefaultOption(){
 	Dialog.addCheckbox("Run measure", runMeasure );
 	Dialog.addCheckbox("Auto-Next slice", nextSlice);
 	Dialog.addHelp("https://github.com/LauLauThom/RoiClicTool");
-	Dialog.addMessage("If you use these tools, please cite\n")
+	Dialog.addMessage("If you use these tools, please cite:\nLaurent Thomas - (2019, December 16)\nImageJ/Fiji 1-clic ROI Tool (Version 1)\nZenodo: http://doi.org/10.5281/zenodo.3577888");
 }
 
 /* Default actions: AddToManager, runManager, nextSlice */
