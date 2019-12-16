@@ -12,4 +12,4 @@ If the option are selected, the generated ROI is added to the Roi Manager, the c
 ## Configuration
 Double-click on the ROI icon to configure the shape and options.
 
-<img src="hhttps://github.com/LauLauThom/RoiClicTool/blob/master/Image/Options.JPG" alt="Options" width="450" height="80">     
+<img src="https://github.com/LauLauThom/RoiClicTool/blob/master/Image/Options.JPG" alt="Options" width="250" height="250">
