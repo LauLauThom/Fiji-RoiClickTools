@@ -13,3 +13,10 @@ If the option are selected, the generated ROI is added to the Roi Manager, the c
 Double-click on the ROI icon to configure the shape and options.
 
 <img src="https://github.com/LauLauThom/RoiClicTool/blob/master/Image/Options.JPG" alt="Options" width="250" height="250">
+
+## Credits
+If you use those tools please cite  
+
+*Laurent Thomas. (2019, December 16)  
+ImageJ/Fiji 1-clic ROI Tool (Version 1)  
+Zenodo: http://doi.org/10.5281/zenodo.3577888*
