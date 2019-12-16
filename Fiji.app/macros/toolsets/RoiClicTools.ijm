@@ -118,6 +118,8 @@ macro "Circle clic Tool Options" {
   } 
   
 
+/*
+// Commented, rotated rectangle replace it
 
 // ------------------ Rectangle ------------------------- //
 
@@ -161,6 +163,7 @@ macro "Rectangle clic Tool Options" {
 	runMeasure   = Dialog.getCheckbox();
 	nextSlice    = Dialog.getCheckbox();
 }
+*/
 
 
 // -------------- Rotated Rectangle --------------- //
