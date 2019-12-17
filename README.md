@@ -9,6 +9,10 @@ Toolset that offers additional toolbar ROI tools, with predefined custom ROI sha
 Using the 1-Click ROI, clicking on an image generates a predefined ROI, centered on the clicked point.  
 If the option are selected, the generated ROI is added to the Roi Manager, the command "run Measure" is run for the selected region and if a stack is used, the next image is displayed. 
 
+## Installation
+In Fiji, simply activate the *ROI 1-click tools* update site.  
+In ImageJ, copy the file *RoiClicTools.ijm* to the folder *ImageJ\macros\toolsets*. 
+
 ## Configuration
 Double-click on the ROI icon to configure the shape and options.
 
