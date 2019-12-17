@@ -40,7 +40,7 @@ function defaultActions(){
 // -------------- Line  --------------- //
 
 // Initalize variables (global such that the option macro can change it)
-var lineLength  = 20;
+var lineLength  = 50;
 var lineAngle  = 45; // trigo orientation
  
 macro "Line clic Tool - Cf00Lff11" {
@@ -68,8 +68,8 @@ macro "Line clic Tool - Cf00Lff11" {
 
 macro "Line clic Tool Options" { 
 	Dialog.create("Line clic tool options");
-	Dialog.addNumber("Length: ", lineLength);
-	Dialog.addNumber("Angle (counter-clockwise): ", lineAngle);
+	Dialog.addNumber("Length (pixels): ", lineLength);
+	Dialog.addNumber("Angle (degrees, counter-clockwise): ", lineAngle);
 	
 	addDefaultOption();
 	
@@ -105,7 +105,7 @@ macro "Circle clic Tool - Cf00O11cc" {
 
 macro "Circle clic Tool Options" { 
    Dialog.create("Circle clic tool options")
-   Dialog.addNumber("Radius", radius);
+   Dialog.addNumber("Radius (pixels)", radius);
 
    addDefaultOption();
 
@@ -169,9 +169,9 @@ macro "Rectangle clic Tool Options" {
 // -------------- Rotated Rectangle --------------- //
 
 // Initalize variables (global such that the option macro can change it)
-var rotRectWidth  = 10;
-var rotRectHeight = 10;
-var rotRectAngle  = 45; // trigo orientation
+var rotRectWidth  = 40;
+var rotRectHeight = 20;
+var rotRectAngle  = 0; // trigo orientation
  
 macro "Rotated Rectangle clic Tool - Cf00R11cc" {
 	roiManager("Associate", "true"); // associate ROI with slice
@@ -198,9 +198,9 @@ macro "Rotated Rectangle clic Tool - Cf00R11cc" {
 
 macro "Rotated Rectangle clic Tool Options" { 
 	Dialog.create("Rotated Rectangle clic tool options");
-	Dialog.addNumber("Width: ", rotRectWidth);
-	Dialog.addNumber("Height: ", rotRectHeight);
-	Dialog.addNumber("Angle (counter-clockwise): ", rotRectAngle);
+	Dialog.addNumber("Width (pixels): ", rotRectWidth);
+	Dialog.addNumber("Height (pixels): ", rotRectHeight);
+	Dialog.addNumber("Angle (degrees, counter-clockwise): ", rotRectAngle);
 	
 	addDefaultOption();
 
@@ -220,9 +220,9 @@ macro "Rotated Rectangle clic Tool Options" {
 // -------------- Ellipse  --------------- //
 
 // Initalize variables (global such that the option macro can change it)
-var ellipseWidth  = 20;
-var ellipseHeight = 10;
-var ellipseAngle  = 45; // trigo orientation
+var ellipseWidth  = 50;
+var ellipseHeight = 20;
+var ellipseAngle  = 0; // trigo orientation
  
 macro "Ellipse clic Tool - Cf00O11fa" {
 	roiManager("Associate", "true"); // associate ROI with slice
@@ -249,9 +249,9 @@ macro "Ellipse clic Tool - Cf00O11fa" {
 
 macro "Ellipse clic Tool Options" { 
 	Dialog.create("Ellipse clic tool options");
-	Dialog.addNumber("Width: ", ellipseWidth);
-	Dialog.addNumber("Height: ", ellipseHeight);
-	Dialog.addNumber("Angle (counter-clockwise): ", ellipseAngle);
+	Dialog.addNumber("Width (pixels): ", ellipseWidth);
+	Dialog.addNumber("Height (pixels): ", ellipseHeight);
+	Dialog.addNumber("Angle (degrees, counter-clockwise): ", ellipseAngle);
 
 	addDefaultOption();
 
