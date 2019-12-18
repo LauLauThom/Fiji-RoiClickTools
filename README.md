@@ -22,8 +22,12 @@ Double-click on the ROI icon to configure the shape and options.
 - Using the 1-click circle tool, one can rapidly measure the average intensity for each dot in the sample image *Dot_Blot*.
 <img src="https://github.com/LauLauThom/RoiClicTool/blob/master/Image/DotBlot.png" alt="DotBlot" width="600" height="250">
 
-- Same for the quntification of bands in gels using the 1-click rectangle tool.
+- Same for the quantification of bands in gels using the 1-click rectangle tool.
 <img src="https://github.com/LauLauThom/RoiClicTool/blob/master/Image/Gel.png" alt="Gel" width="650" height="350">
+
+- Using the "custom macro" field, any additional action can be executed upon click.  
+Below an example where the clicked region is cropped to a new image using the "duplicate" commands.
+<img src="https://github.com/LauLauThom/RoiClicTool/blob/master/Image/customMacro.png" alt="customMacro" width="900" height="320">
 
 
 ## Credits
