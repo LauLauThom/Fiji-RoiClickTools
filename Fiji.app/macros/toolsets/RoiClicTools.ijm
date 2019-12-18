@@ -10,6 +10,8 @@
 var addToManager = true;
 var runMeasure = true;
 var nextSlice = true;
+var doExtraCmd = false;
+var extraCmd = "//Enter some macro command";
 
 function goNextSlice(){
 	Stack.getDimensions(stackWidth, stackHeight, channels, slices, frames);
@@ -21,14 +23,29 @@ function addDefaultOption(){
 	Dialog.addCheckbox("Add to Roi Manager", addToManager);
 	Dialog.addCheckbox("Run measure", runMeasure );
 	Dialog.addCheckbox("Auto-Next slice", nextSlice);
+	
+	Dialog.addCheckbox("Run extra custom commands", doExtraCmd);
+	Dialog.addString("Custom macro commands", extraCmd, 25);
+	
 	Dialog.addHelp("https://github.com/LauLauThom/RoiClicTool");
 	Dialog.addMessage("If you use these tools, please cite:\nLaurent Thomas - (2019, December 16)\nImageJ/Fiji 1-click ROI Tools (Version 1)\nZenodo: http://doi.org/10.5281/zenodo.3577888");
 }
 
+
+/* Recover default options from dialog */
+function getDefaultOptions(){
+	addToManager = Dialog.getCheckbox();
+	runMeasure   = Dialog.getCheckbox();
+	nextSlice    = Dialog.getCheckbox();
+	doExtraCmd   = Dialog.getCheckbox();
+	extraCmd     = Dialog.getString(); 
+}
+
 /* Default actions: AddToManager, runManager, nextSlice */
 function defaultActions(){
+	if (doExtraCmd)   eval(extraCmd);
 	if (addToManager) roiManager("Add");
-	if (runMeasure) run("Measure");
+	if (runMeasure)   run("Measure");
 	goNextSlice();         // only if nextSlice is True
 }
 
@@ -78,9 +95,7 @@ macro "Line clic Tool Options" {
 	lineLength  = Dialog.getNumber();
 	lineAngle   = Dialog.getNumber();
 	
-	addToManager = Dialog.getCheckbox();
-	runMeasure   = Dialog.getCheckbox();
-	nextSlice    = Dialog.getCheckbox();
+	getDefaultOptions(); //Update the global variables addToManager, runMeasure, nextSlice 
 }
 
 
@@ -112,9 +127,9 @@ macro "Circle clic Tool Options" {
    Dialog.show();
    
    radius       = Dialog.getNumber();
-   addToManager = Dialog.getCheckbox();
-   runMeasure   = Dialog.getCheckbox();
-   nextSlice    = Dialog.getCheckbox();   
+   getDefaultOptions(); //Update the global variables addToManager, runMeasure, nextSlice 
+
+
   } 
   
 
@@ -210,9 +225,8 @@ macro "Rotated Rectangle clic Tool Options" {
 	rotRectHeight = Dialog.getNumber();
 	rotRectAngle  = Dialog.getNumber();
 	
-	addToManager = Dialog.getCheckbox();
-	runMeasure   = Dialog.getCheckbox();
-	nextSlice    = Dialog.getCheckbox();
+	getDefaultOptions(); //Update the global variables addToManager, runMeasure, nextSlice 
+
 }
 
 
@@ -261,7 +275,6 @@ macro "Ellipse clic Tool Options" {
 	ellipseHeight = Dialog.getNumber();
 	ellipseAngle  = Dialog.getNumber();
 	
-	addToManager = Dialog.getCheckbox();
-	runMeasure   = Dialog.getCheckbox();
-	nextSlice    = Dialog.getCheckbox();
+	getDefaultOptions(); //Update the global variables addToManager, runMeasure, nextSlice 
+
 }
