@@ -1,7 +1,7 @@
 /* This macro should be placed in the ImageJ>macro>toolsets folder so as to appear in the toolbar >> section
-* This click tool creates a circular ROI of defined radius center on the point of the clic, add this circular ROI to the ROI manager and run a measurement in this ROI. 
+* This click tool creates predefined ROI centered on the point of the clic, add this ROI to the ROI manager and run a measurement in this ROI. 
 * With stacks it goes automatically to the next slice.
-* The radius of the circular ROI can be set by right clicking or double clicking on the tool icon  
+* The dimensions of the ROI can be set by right clicking or double clicking on the tool icon  
 * The choice of measurements should be set in the Analyse > Set Measurements... prior to the successive click 
 * The best is to set the options "Associate ROI with slices" of the ROI manager (More>Options)  
 * The ROI set and measurement table should be manually saved after use.   
