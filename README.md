@@ -16,7 +16,15 @@ In ImageJ, copy the file *RoiClicTools.ijm* to the folder *ImageJ\macros\toolset
 ## Configuration
 Double-click on the ROI icon to configure the shape and options.
 
-<img src="https://github.com/LauLauThom/RoiClicTool/blob/master/Image/Options.JPG" alt="Options" width="250" height="250">
+<img src="https://github.com/LauLauThom/RoiClicTool/blob/master/Image/Options.JPG" alt="Options" width="300" height="250">
+
+## Examples
+- Using the 1-click circle tool, one can rapidly measure the average intensity for each dot in the sample image *Dot_Blot*.
+<img src="https://github.com/LauLauThom/RoiClicTool/blob/master/Image/DotBlot.png" alt="DotBlot" width="600" height="250">
+
+- Same for the quntification of bands in gels using the 1-click rectangle tool.
+<img src="https://github.com/LauLauThom/RoiClicTool/blob/master/Image/Gel.png" alt="Gel" width="650" height="350">
+
 
 ## Credits
 If you use those tools please cite  
