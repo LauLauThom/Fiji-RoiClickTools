@@ -41,12 +41,19 @@ function getDefaultOptions(){
 	extraCmd     = Dialog.getString(); 
 }
 
-/* Default actions: AddToManager, runManager, nextSlice */
+/* Default actions, in this order: AddToManager, runMeasure, nextSlice, customAction and select None  */
+// Issue with stack and extra command crop : if NextSlice then crop, wrong 
 function defaultActions(){
-	if (doExtraCmd)   eval(extraCmd);
 	if (addToManager) roiManager("Add");
 	if (runMeasure)   run("Measure");
-	goNextSlice();         // only if nextSlice is True
+	if (doExtraCmd){ // Get the current image title to be able to select back the initial image after the extraCommand (for next slice in particular)
+		imageName = getTitle();
+		eval(extraCmd);
+		selectImage(imageName);
+	}   
+	goNextSlice();    // only if nextSlice is True
+	run("Select None"); // Deselect last drawn ROI
+
 }
 
 
@@ -77,8 +84,6 @@ macro "Line clic Tool - Cf00Lff11" {
 		makeLine(x1, y1, x2, y2);
 		
 		defaultActions();
-		
-		run("Select None");   // Deselect last drawn ROI
 	}
 }	
 
@@ -113,8 +118,6 @@ macro "Circle clic Tool - Cf00O11cc" {
 		makeOval(x-radius, y-radius, 2*radius, 2*radius); // Draw the circle of given radius using the points from ROI manager as center
 		
 		defaultActions();
-		
-		run("Select None"); // Deselect last drawn ROI
 	}
 }	
 
@@ -126,10 +129,8 @@ macro "Circle clic Tool Options" {
 
    Dialog.show();
    
-   radius       = Dialog.getNumber();
+   radius = Dialog.getNumber();
    getDefaultOptions(); //Update the global variables addToManager, runMeasure, nextSlice 
-
-
   } 
   
 
@@ -157,7 +158,7 @@ macro "Rectangle clic Tool - Cf00R11cc" {
 		
 		defaultActions();
 		
-		run("Select None");   // Deselect last drawn ROI
+		   // Deselect last drawn ROI
 	}
 }	
 
@@ -174,9 +175,9 @@ macro "Rectangle clic Tool Options" {
 	rectWidth  = Dialog.getNumber();
 	rectHeight = Dialog.getNumber();
 	
-	addToManager = Dialog.getCheckbox();
-	runMeasure   = Dialog.getCheckbox();
-	nextSlice    = Dialog.getCheckbox();
+	getDefaultOptions();
+	
+
 }
 */
 
@@ -205,8 +206,6 @@ macro "Rotated Rectangle clic Tool - Cf00R11cc" {
 		makeRotatedRectangle(x1, y1, x2, y2, rotRectHeight);
 		
 		defaultActions();
-		
-		run("Select None");   // Deselect last drawn ROI
 	}
 }	
 
@@ -226,7 +225,6 @@ macro "Rotated Rectangle clic Tool Options" {
 	rotRectAngle  = Dialog.getNumber();
 	
 	getDefaultOptions(); //Update the global variables addToManager, runMeasure, nextSlice 
-
 }
 
 
@@ -255,8 +253,6 @@ macro "Ellipse clic Tool - Cf00O11fa" {
 		makeEllipse(x1, y1, x2, y2, ellipseHeight/ellipseWidth);
 		
 		defaultActions();
-		
-		run("Select None");   // Deselect last drawn ROI
 	}
 }	
 
