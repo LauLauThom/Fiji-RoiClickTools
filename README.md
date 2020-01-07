@@ -18,6 +18,9 @@ Double-click on the ROI icon to configure the shape and options.
 
 <img src="https://github.com/LauLauThom/RoiClicTool/blob/master/Image/Options.JPG" alt="Options" width="300" height="250">
 
+## Video tutorial
+[![Tuto](https://img.youtube.com/vi/XeCf2P-jgYM/0.jpg)](https://www.youtube.com/watch?v=XeCf2P-jgYM) 
+
 ## Examples
 - Using the 1-click circle tool, one can rapidly measure the average intensity for each dot in the sample image *Dot_Blot*.
 <img src="https://github.com/LauLauThom/RoiClicTool/blob/master/Image/DotBlot.png" alt="DotBlot" width="600" height="250">
