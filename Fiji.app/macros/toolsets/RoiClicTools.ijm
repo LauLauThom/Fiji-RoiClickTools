@@ -46,11 +46,19 @@ function getDefaultOptions(){
 function defaultActions(){
 	if (addToManager) roiManager("Add");
 	if (runMeasure)   run("Measure");
-	if (doExtraCmd){ // Get the current image title to be able to select back the initial image after the extraCommand (for next slice in particular)
-		imageName = getTitle();
-		eval(extraCmd);
-		selectImage(imageName);
-	}   
+	
+	// Get the current image title to be able to select back the initial image after the extraCommand, which might have selected another image
+	imageName = getTitle();
+	if (doExtraCmd) eval(extraCmd);
+	/*
+	* MORE CUSTOM COMMANDS (executed even if the tick box is not ticked)
+	* Examples (remove the //, save the file and relaunch fiji to test it)
+	*/
+	//run("Duplicate...", " ");
+	//run("Invert", "slice");
+	
+	selectImage(imageName); // select back initial image, before calling next slice
+	
 	goNextSlice();    // only if nextSlice is True
 	run("Select None"); // Deselect last drawn ROI
 
