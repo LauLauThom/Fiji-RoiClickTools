@@ -60,7 +60,7 @@ function defaultActions(){
 	selectImage(imageName); // select back initial image, before calling next slice
 	
 	goNextSlice();    // only if nextSlice is True
-	run("Select None"); // Deselect last drawn ROI
+	//run("Select None"); // Deselect last drawn ROI - commented: if not adding to ROI Manager then ROI not visible at all !
 
 }
 
