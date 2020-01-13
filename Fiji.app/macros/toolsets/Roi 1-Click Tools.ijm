@@ -7,6 +7,16 @@
 * The ROI set and measurement table should be manually saved after use.   
 */
 
+// Macro defining custom keyboard shortcut (key in square-bracket)
+// Several shortcut can co-exist, just add a new macro
+// NB : With digit key, use the row key at the top of the keyboard (does not work with keypad)
+macro "Custom shortuct [1]" {
+	// ADD CUSTOM COMMANDS HERE
+	run("Images to Stack", "name=Stack title=[] use");
+	run("Make Montage...", "columns=5 rows=1 scale=1");
+}
+
+
 var addToManager = true;
 var runMeasure = true;
 var nextSlice = true;
@@ -51,7 +61,7 @@ function defaultActions(){
 	imageName = getTitle();
 	if (doExtraCmd) eval(extraCmd);
 	/*
-	* MORE CUSTOM COMMANDS (executed even if the tick box is not ticked)
+	* MORE CUSTOM COMMANDS (executed upon click with any of the tool, even if the tick box is not ticked)
 	* Examples (remove the //, save the file and relaunch fiji to test it)
 	*/
 	//run("Duplicate...", " ");
