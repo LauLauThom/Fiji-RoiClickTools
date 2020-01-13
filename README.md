@@ -53,10 +53,11 @@ You can add some commands of your choice below the examples.
 Installing the ROI 1-click tools, also installs a customisable keyboard shortcut.  
 In short, pressing a key will execute a predefined set of commands.  
 The key and the set of commands can be edited at the beginning of the source code in the macro "Custom shortcut"
-macro "Custom shortcut [1]" {
-	// ADD CUSTOM COMMANDS HERE
-	run("Images to Stack", "name=Stack title=[] use");
-	run("Make Montage...", "columns=5 rows=1 scale=1");
+
+	macro "Custom shortcut [1]" {
+		// ADD CUSTOM COMMANDS HERE
+		run("Images to Stack", "name=Stack title=[] use");
+		run("Make Montage...", "columns=5 rows=1 scale=1");
 }
 
 ## Credits
