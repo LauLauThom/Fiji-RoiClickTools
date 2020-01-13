@@ -10,7 +10,7 @@
 // Macro defining custom keyboard shortcut (key in square-bracket)
 // Several shortcut can co-exist, just add a new macro
 // NB : With digit key, use the row key at the top of the keyboard (does not work with keypad)
-macro "Custom shortuct [1]" {
+macro "Custom shortcut [1]" {
 	// ADD CUSTOM COMMANDS HERE
 	run("Images to Stack", "name=Stack title=[] use");
 	run("Make Montage...", "columns=5 rows=1 scale=1");
