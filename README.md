@@ -19,7 +19,7 @@ Double-click on the ROI icon to configure the shape and options.
 <img src="https://github.com/LauLauThom/RoiClicTool/blob/master/Image/Options.JPG" alt="Options" width="300" height="250">
 
 ## Video tutorial
-[![Tuto](https://img.youtube.com/vi/XeCf2P-jgYM/0.jpg)](https://www.youtube.com/watch?v=XeCf2P-jgYM) 
+[![Tuto](https://img.youtube.com/vi/ZPS78T_-gUs/0.jpg)](https://www.youtube.com/watch?v=ZPS78T_-gUs) 
 
 ## Examples
 ### - Circle tool
