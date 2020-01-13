@@ -37,7 +37,7 @@ Multiple commands can be entered inline in the one-line field by separating them
 <img src="https://github.com/LauLauThom/RoiClicTool/blob/master/Image/customMacro.png" alt="customMacro" width="900" height="320">
 
 ### - More complex custom actions
-More complex operations can be implemented by adding a few lines in the source code.  
+More complex operations to be executed on click can be implemented by adding a few lines in the source code.  
 Edit the file `Roi 1-click Tools.ijm` in `Fiji.app/macros/toolsets`. 
 Then look for the paragraph
 
@@ -48,6 +48,16 @@ Then look for the paragraph
 	//run("Invert", "slice");
 
 You can add some commands of your choice below the examples.
+
+### - Custom keyboard shortcuts
+Installing the ROI 1-click tools, also installs a customisable keyboard shortcut.  
+In short, pressing a key will execute a predefined set of commands.  
+The key and the set of commands can be edited at the beginning of the source code in the macro "Custom shortcut"
+macro "Custom shortcut [1]" {
+	// ADD CUSTOM COMMANDS HERE
+	run("Images to Stack", "name=Stack title=[] use");
+	run("Make Montage...", "columns=5 rows=1 scale=1");
+}
 
 ## Credits
 If you use those tools please cite  
