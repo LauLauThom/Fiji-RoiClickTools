@@ -11,9 +11,11 @@
 // Several shortcut can co-exist, just add a new macro
 // NB : With digit key, use the row key at the top of the keyboard (does not work with keypad)
 macro "Custom shortcut [1]" {
+	// This example makes a stack and a montage of the currently opened images
 	// ADD CUSTOM COMMANDS HERE
+	N = nImages();
 	run("Images to Stack", "name=Stack title=[] use");
-	run("Make Montage...", "columns=5 rows=1 scale=1");
+	run("Make Montage...", "columns=&N rows=1 scale=1");
 }
 
 
