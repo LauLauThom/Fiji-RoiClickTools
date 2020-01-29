@@ -1,8 +1,8 @@
 /* This macro should be placed in the ImageJ>macro>toolsets folder so as to appear in the toolbar >> section
-* This click tool creates predefined ROI centered on the point of the clic, add this ROI to the ROI manager and run a measurement in this ROI. 
+* This Click tool creates predefined ROI centered on the point of the Click, add this ROI to the ROI manager and run a measurement in this ROI. 
 * With stacks it goes automatically to the next slice.
 * The dimensions of the ROI can be set by right clicking or double clicking on the tool icon  
-* The choice of measurements should be set in the Analyse > Set Measurements... prior to the successive click 
+* The choice of measurements should be set in the Analyse > Set Measurements... prior to the successive Click 
 * The best is to set the options "Associate ROI with slices" of the ROI manager (More>Options)  
 * The ROI set and measurement table should be manually saved after use.   
 */
@@ -39,8 +39,8 @@ function addDefaultOption(){
 	Dialog.addCheckbox("Run extra custom commands", doExtraCmd);
 	Dialog.addString("Custom macro commands", extraCmd, 25);
 	
-	Dialog.addHelp("https://github.com/LauLauThom/RoiClicTool");
-	Dialog.addMessage("If you use these tools, please cite:\nLaurent Thomas - (2019, December 16)\nImageJ/Fiji 1-click ROI Tools (Version 1)\nZenodo: http://doi.org/10.5281/zenodo.3577888");
+	Dialog.addHelp("https://github.com/LauLauThom/Fiji-RoiClickTools");
+	Dialog.addMessage("If you use these tools, please cite:\nThomas, LS; Gehrig, J (2020)\nImageJ/Fiji ROI 1-click tools for rapid manual image annotations and measurements\nmicroPublication Biology - 10.17912/micropub.biology.000215");
 }
 
 
@@ -63,7 +63,7 @@ function defaultActions(){
 	imageName = getTitle();
 	if (doExtraCmd) eval(extraCmd);
 	/*
-	* MORE CUSTOM COMMANDS (executed upon click with any of the tool, even if the tick box is not ticked)
+	* MORE CUSTOM COMMANDS (executed upon Click with any of the tool, even if the tick box is not ticked)
 	* Examples (remove the //, save the file and relaunch fiji to test it)
 	*/
 	//run("Duplicate...", " ");
@@ -87,14 +87,14 @@ function defaultActions(){
 var lineLength  = 50;
 var lineAngle  = 45; // trigo orientation
  
-macro "Line clic Tool - Cf00Lff11" {
+macro "Line Click Tool - Cf00Lff11" {
 	roiManager("Associate", "true"); // associate ROI with slice
 	roiManager("Show All with labels");	
 	
 	getCursorLoc(xcenter, ycenter, z, flags); 
 	//print("Sample: "+x+" "+y); 
 
-	if ((flags==16)|(flags == 48)){  // 16 : left click or 48 = 16 + 32 Left-click + in a ROI
+	if ((flags==16)|(flags == 48)){  // 16 : left Click or 48 = 16 + 32 Left-Click + in a ROI
 		x1 = xcenter - cos(PI/180 * lineAngle) * lineLength/2;
 		y1 = ycenter + sin(PI/180 * lineAngle) * lineLength/2;
 		
@@ -108,8 +108,8 @@ macro "Line clic Tool - Cf00Lff11" {
 }	
 
 
-macro "Line clic Tool Options" { 
-	Dialog.create("Line clic tool options");
+macro "Line Click Tool Options" { 
+	Dialog.create("Line Click tool options");
 	Dialog.addNumber("Length (pixels): ", lineLength);
 	Dialog.addNumber("Angle (degrees, counter-clockwise): ", lineAngle);
 	
@@ -127,22 +127,22 @@ macro "Line clic Tool Options" {
 // -------------------- Circle ---------------- //
 var radius = 20; 
 
-macro "Circle clic Tool - Cf00O11cc" {
+macro "Circle Click Tool - Cf00O11cc" {
 	roiManager("Associate", "true"); // associate ROI with slice
 	roiManager("Show All with labels");	
 	
 	getCursorLoc(x, y, z, flags); 
 	//print("Sample: "+x+" "+y); 
 
-	if ((flags==16)|(flags == 48)){ 					  // 16 : left click or 48 = 16 + 32 Left-click + in a ROI
+	if ((flags==16)|(flags == 48)){ 					  // 16 : left Click or 48 = 16 + 32 Left-Click + in a ROI
 		makeOval(x-radius, y-radius, 2*radius, 2*radius); // Draw the circle of given radius using the points from ROI manager as center
 		
 		defaultActions();
 	}
 }	
 
-macro "Circle clic Tool Options" { 
-   Dialog.create("Circle clic tool options")
+macro "Circle Click Tool Options" { 
+   Dialog.create("Circle Click tool options")
    Dialog.addNumber("Radius (pixels)", radius);
 
    addDefaultOption();
@@ -163,14 +163,14 @@ macro "Circle clic Tool Options" {
 var rectWidth  = 10;
 var rectHeight = 10;
 
-macro "Rectangle clic Tool - Cf00R11cc" {
+macro "Rectangle Click Tool - Cf00R11cc" {
 	roiManager("Associate", "true"); // associate ROI with slice
 	roiManager("Show All with labels");	
 	
 	getCursorLoc(xcenter, ycenter, z, flags); 
 	//print("Sample: "+x+" "+y); 
 
-	if ((flags==16)|(flags == 48)){  // 16 : left click or 48 = 16 + 32 Left-click + in a ROI
+	if ((flags==16)|(flags == 48)){  // 16 : left Click or 48 = 16 + 32 Left-Click + in a ROI
 		xcorner = xcenter - rectWidth/2;
 		ycorner = ycenter - rectHeight/2;
 		
@@ -183,8 +183,8 @@ macro "Rectangle clic Tool - Cf00R11cc" {
 }	
 
 
-macro "Rectangle clic Tool Options" { 
-	Dialog.create("Rectangle clic tool options");
+macro "Rectangle Click Tool Options" { 
+	Dialog.create("Rectangle Click tool options");
 	Dialog.addNumber("Width: ", rectWidth);
 	Dialog.addNumber("Height: ", rectHeight);
 	
@@ -209,14 +209,14 @@ var rotRectWidth  = 40;
 var rotRectHeight = 20;
 var rotRectAngle  = 0; // trigo orientation
  
-macro "Rotated Rectangle clic Tool - Cf00R11cc" {
+macro "Rotated Rectangle Click Tool - Cf00R11cc" {
 	roiManager("Associate", "true"); // associate ROI with slice
 	roiManager("Show All with labels");	
 	
 	getCursorLoc(xcenter, ycenter, z, flags); 
 	//print("Sample: "+x+" "+y); 
 
-	if ((flags==16)|(flags == 48)){  // 16 : left click or 48 = 16 + 32 Left-click + in a ROI
+	if ((flags==16)|(flags == 48)){  // 16 : left Click or 48 = 16 + 32 Left-Click + in a ROI
 		x1 = xcenter - cos(PI/180 * rotRectAngle) * rotRectWidth/2;
 		y1 = ycenter + sin(PI/180 * rotRectAngle) * rotRectWidth/2;
 		
@@ -230,8 +230,8 @@ macro "Rotated Rectangle clic Tool - Cf00R11cc" {
 }	
 
 
-macro "Rotated Rectangle clic Tool Options" { 
-	Dialog.create("Rotated Rectangle clic tool options");
+macro "Rotated Rectangle Click Tool Options" { 
+	Dialog.create("Rotated Rectangle Click tool options");
 	Dialog.addNumber("Width (pixels): ", rotRectWidth);
 	Dialog.addNumber("Height (pixels): ", rotRectHeight);
 	Dialog.addNumber("Angle (degrees, counter-clockwise): ", rotRectAngle);
@@ -256,14 +256,14 @@ var ellipseWidth  = 50;
 var ellipseHeight = 20;
 var ellipseAngle  = 0; // trigo orientation
  
-macro "Ellipse clic Tool - Cf00O11fa" {
+macro "Ellipse Click Tool - Cf00O11fa" {
 	roiManager("Associate", "true"); // associate ROI with slice
 	roiManager("Show All with labels");	
 	
 	getCursorLoc(xcenter, ycenter, z, flags); 
 	//print("Sample: "+x+" "+y); 
 
-	if ((flags==16)|(flags == 48)){  // 16 : left click or 48 = 16 + 32 Left-click + in a ROI
+	if ((flags==16)|(flags == 48)){  // 16 : left Click or 48 = 16 + 32 Left-Click + in a ROI
 		x1 = xcenter - cos(PI/180 * ellipseAngle) * ellipseWidth/2;
 		y1 = ycenter + sin(PI/180 * ellipseAngle) * ellipseWidth/2;
 		
@@ -277,8 +277,8 @@ macro "Ellipse clic Tool - Cf00O11fa" {
 }	
 
 
-macro "Ellipse clic Tool Options" { 
-	Dialog.create("Ellipse clic tool options");
+macro "Ellipse Click Tool Options" { 
+	Dialog.create("Ellipse Click tool options");
 	Dialog.addNumber("Width (pixels): ", ellipseWidth);
 	Dialog.addNumber("Height (pixels): ", ellipseHeight);
 	Dialog.addNumber("Angle (degrees, counter-clockwise): ", ellipseAngle);
