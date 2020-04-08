@@ -5,8 +5,12 @@
 * The choice of measurements should be set in the Analyse > Set Measurements... prior to the successive Click 
 * The best is to set the options "Associate ROI with slices" of the ROI manager (More>Options)  
 * The ROI set and measurement table should be manually saved after use.   
+*
+* This code is under BSD-2 licence.
+* Author: Laurent Thomas
 */
 
+//----------------- KEYBOARD SHORTCUTS ------------------//
 // Macro defining custom keyboard shortcut (key in square-bracket)
 // Several shortcut can co-exist, just add a new macro
 // NB : With digit key, use the row key at the top of the keyboard (does not work with keypad)
@@ -18,12 +22,29 @@ macro "Custom shortcut [1]" {
 	run("Make Montage...", "columns=&N rows=1 scale=1");
 }
 
+  // Numeric keypad shortcuts used to set the default ROI group
+  macro "Numeric Pad 0 [n0]" { npad(0); }
+  macro "Numeric Pad 1 [n1]" { npad(1); }
+  macro "Numeric Pad 2 [n2]" { npad(2); }
+  macro "Numeric Pad 3 [n3]" { npad(3); }
+  macro "Numeric Pad 4 [n4]" { npad(4); }
+  macro "Numeric Pad 5 [n5]" { npad(5); }
+  macro "Numeric Pad 6 [n6]" { npad(6); }
+  macro "Numeric Pad 7 [n7]" { npad(7); }
+  macro "Numeric Pad 8 [n8]" { npad(8); }
+  macro "Numeric Pad 9 [n9]" { npad(9); }
+
+  function npad(digit) {
+      Roi.setDefaultGroup(digit);
+  }
+
+// ----------- Helper functions -----------------//
 
 var addToManager = true;
 var runMeasure = true;
 var nextSlice = true;
 var doExtraCmd = false;
-var extraCmd = "//Enter some macro command";
+var extraCmd = "run('Duplicate...', 'title=crop');";
 
 function goNextSlice(){
 	Stack.getDimensions(stackWidth, stackHeight, channels, slices, frames);
@@ -76,6 +97,7 @@ function defaultActions(){
 
 }
 
+// --------------- CLICK-TOOLS ---------//
 
 // -------------- Point  --------------- //
 //Not provided already available in built-in imageJ
