@@ -67,6 +67,7 @@ The key and the set of commands can be edited at the beginning of the source cod
 ## Credits
 If you use those tools please cite  
 
-*Laurent Thomas. (2019, December 16)  
-ImageJ/Fiji 1-clic ROI Tool (Version 1)  
-Zenodo: http://doi.org/10.5281/zenodo.3577888*
+*Thomas, LSV; Gehrig, J (2020)  
+ImageJ/Fiji ROI 1-click tools for rapid manual image annotations and measurements  
+microPublication Biology. 
+DOI: [10.17912/micropub.biology.000215](https://doi.org/10.17912/micropub.biology.000215)*
