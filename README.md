@@ -49,9 +49,13 @@ Then look for the paragraph
 
 You can add some commands of your choice below the examples.
 
-### - Custom keyboard shortcuts
-Installing the ROI 1-click tools, also installs a customisable keyboard shortcut.  
-In short, pressing a key will execute a predefined set of commands.  
+### - Keyboard shortcuts
+Installing the ROI 1-click tools, also installs some default keyboard shortcuts.
+- 0-9 of the numerical keypad (right side, not top row of keyboard) will set the current roi group to the key pressed.
+
+- 1 of the top row triggers the custom shortcut, currently making a montage of opened images.  
+
+Additional shortcuts (letters also possible) can be added by modifying the source code.  
 The key and the set of commands can be edited at the beginning of the source code in the macro "Custom shortcut"
 
 	macro "Custom shortcut [1]" {
