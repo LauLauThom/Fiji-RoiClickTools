@@ -1,4 +1,5 @@
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3577888.svg)](https://doi.org/10.5281/zenodo.3577888)
+[![DOI](https://zenodo.org/badge/DOI/10.17912/micropub.biology.000215.svg)](https://doi.org/10.17912/micropub.biology.000215)
+![Twitter Follow](https://img.shields.io/twitter/follow/LauLauThom?style=social)
 
 # ImageJ/Fiji Roi 1-Click Tool
 
