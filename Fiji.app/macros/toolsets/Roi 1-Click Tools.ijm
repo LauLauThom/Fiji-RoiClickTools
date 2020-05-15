@@ -54,10 +54,17 @@ function goNextSlice(){
 
 /* Add default option to dialog */
 function addDefaultOption(){
+	
+	// Recover previous parameters
+	addToManager = call("ij.Prefs.get", "default.addToManager", addToManager);
+	runMeasure   = call("ij.Prefs.get", "default.runMeasure", runMeasure);
+	nextSlice    = call("ij.Prefs.get", "default.nextSlice", nextSlice);
+	doExtraCmd   = call("ij.Prefs.get", "default.doExtraCmd", doExtraCmd);
+	extraCmd     = call("ij.Prefs.get", "default.extraCmd", extraCmd);
+
 	Dialog.addCheckbox("Add to Roi Manager", addToManager);
 	Dialog.addCheckbox("Run measure", runMeasure );
 	Dialog.addCheckbox("Auto-Next slice", nextSlice);
-	
 	Dialog.addCheckbox("Run extra custom commands", doExtraCmd);
 	Dialog.addString("Custom macro commands", extraCmd, 25);
 	
@@ -73,6 +80,12 @@ function getDefaultOptions(){
 	nextSlice    = Dialog.getCheckbox();
 	doExtraCmd   = Dialog.getCheckbox();
 	extraCmd     = Dialog.getString(); 
+	
+	call("ij.Prefs.set", "default.addToManager", addToManager);
+	call("ij.Prefs.set", "default.runMeasure", runMeasure);
+	call("ij.Prefs.set", "default.nextSlice", nextSlice);
+	call("ij.Prefs.set", "default.doExtraCmd", doExtraCmd);
+	call("ij.Prefs.set", "default.extraCmd", extraCmd);
 }
 
 /* Default actions, in this order: AddToManager, runMeasure, nextSlice, customAction and select None  */
@@ -133,17 +146,23 @@ macro "Line Click Tool - Cf00Lff11" {
 
 macro "Line Click Tool Options" { 
 	Dialog.create("Line Click tool options");
+
+	// recover previously typed values
+	lineLength = call("ij.Prefs.get", "line.length", 200); // default 200
+	lineAngle  = call("ij.Prefs.get", "line.angle", 0);  // default 0
+	
 	Dialog.addNumber("Length (pixels): ", lineLength);
 	Dialog.addNumber("Angle (degrees, counter-clockwise): ", lineAngle);
-	
 	addDefaultOption();
-	
 	Dialog.show();
 	
 	lineLength  = Dialog.getNumber();
 	lineAngle   = Dialog.getNumber();
-	
 	getDefaultOptions(); //Update the global variables addToManager, runMeasure, nextSlice 
+
+	// Save entered value
+	call("ij.Prefs.set", "line.length", lineLength);
+	call("ij.Prefs.set", "line.angle", lineAngle);
 }
 
 
@@ -166,14 +185,20 @@ macro "Circle Click Tool - Cf00O11cc" {
 
 macro "Circle Click Tool Options" { 
    Dialog.create("Circle Click tool options")
+   
+   // recover previously typed values
+   radius = call("ij.Prefs.get", "circle.radius", 200); // default 200
+   
    Dialog.addNumber("Radius (pixels)", radius);
-
    addDefaultOption();
-
    Dialog.show();
    
    radius = Dialog.getNumber();
    getDefaultOptions(); //Update the global variables addToManager, runMeasure, nextSlice 
+   
+   // Save typed value
+   	call("ij.Prefs.set", "circle.radius", radius);
+
   } 
   
 
@@ -255,19 +280,27 @@ macro "Rotated Rectangle Click Tool - Cf00R11cc" {
 
 macro "Rotated Rectangle Click Tool Options" { 
 	Dialog.create("Rotated Rectangle Click tool options");
+	
+	// Recover saved parameters
+	rotRectWidth  = call("ij.Prefs.get", "rect.width", 200);  // default 200
+    rotRectHeight = call("ij.Prefs.get", "rect.height", 100); // default 100
+	rotRectAngle  = call("ij.Prefs.get", "rect.angle", 0);    // default 0
+	
 	Dialog.addNumber("Width (pixels): ", rotRectWidth);
 	Dialog.addNumber("Height (pixels): ", rotRectHeight);
 	Dialog.addNumber("Angle (degrees, counter-clockwise): ", rotRectAngle);
-	
 	addDefaultOption();
-
 	Dialog.show();
 	
 	rotRectWidth  = Dialog.getNumber();
 	rotRectHeight = Dialog.getNumber();
 	rotRectAngle  = Dialog.getNumber();
-	
 	getDefaultOptions(); //Update the global variables addToManager, runMeasure, nextSlice 
+	
+	// Save entered variables
+	call("ij.Prefs.set", "rect.width", rotRectWidth);
+	call("ij.Prefs.set", "rect.height", rotRectHeight);
+	call("ij.Prefs.set", "rect.angle", rotRectAngle);
 }
 
 
@@ -302,18 +335,25 @@ macro "Ellipse Click Tool - Cf00O11fa" {
 
 macro "Ellipse Click Tool Options" { 
 	Dialog.create("Ellipse Click tool options");
+	
+	// Recover saved values
+	ellipseWidth  = call("ij.Prefs.get", "ellipse.width", 200);  // default 200
+    ellipseHeight = call("ij.Prefs.get", "ellipse.height", 100); // default 100
+	ellipseAngle  = call("ij.Prefs.get", "ellipse.angle", 0);    // default 0
+	
 	Dialog.addNumber("Width (pixels): ", ellipseWidth);
 	Dialog.addNumber("Height (pixels): ", ellipseHeight);
 	Dialog.addNumber("Angle (degrees, counter-clockwise): ", ellipseAngle);
-
 	addDefaultOption();
-
 	Dialog.show();
 	
 	ellipseWidth  = Dialog.getNumber();
 	ellipseHeight = Dialog.getNumber();
 	ellipseAngle  = Dialog.getNumber();
-	
 	getDefaultOptions(); //Update the global variables addToManager, runMeasure, nextSlice 
-
+	
+	// Save entered values
+	call("ij.Prefs.set", "ellipse.width", ellipseWidth);
+	call("ij.Prefs.set", "ellipse.height", ellipseHeight);
+	call("ij.Prefs.set", "ellipse.angle", ellipseAngle);
 }
