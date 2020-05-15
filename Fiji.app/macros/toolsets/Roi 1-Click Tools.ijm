@@ -36,6 +36,7 @@ macro "Custom shortcut [1]" {
 
   function npad(digit) {
       Roi.setDefaultGroup(digit);
+      showStatus("Set default Roi group to: " + digit);
   }
 
 // ----------- Helper functions -----------------//
