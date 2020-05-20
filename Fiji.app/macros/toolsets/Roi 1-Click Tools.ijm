@@ -357,3 +357,55 @@ macro "Ellipse Click Tool Options" {
 	call("ij.Prefs.set", "ellipse.height", ellipseHeight);
 	call("ij.Prefs.set", "ellipse.angle", ellipseAngle);
 }
+
+
+// ----------------- Custom Line Tool ---------- //
+var xoffset = newArray(50,50);
+var yoffset = newArray(100,100);
+var isLine;
+
+
+macro "Update custom ROI Action Tool - C00cO11cc" {
+	// this macro "save" the current Roi upon click on the toolbar icon
+	
+	isLine = is("line");
+	
+	// Compute center of line or polygon as center of bounding-box
+	Roi.getBounds(x, y, width, height);
+	xcenter = x+width/2;
+	ycenter = y+height/2;
+	
+	// Get roi coordinates and compute coordinates compared to bbox-center
+	Roi.getCoordinates(xpoints, ypoints);
+	size = Roi.size()
+	xoffset = newArray(size);
+	yoffset = newArray(size);
+	for (i=0; i<size; i++){
+		xoffset[i] = xpoints[i] - xcenter;
+		yoffset[i] = ypoints[i] - ycenter;
+	}
+}
+
+
+macro "Custom ROI Tool - Cf00Lff11" {
+	roiManager("Associate", "true"); // associate ROI with slice
+	roiManager("Show All with labels");	
+	
+	getCursorLoc(xcenter, ycenter, z, flags); 
+	
+	size = xoffset.length;
+	xpoints = newArray(size); // contains the new ROI points
+	ypoints = newArray(size); 
+	
+	if ((flags==16)|(flags == 48)){  // 16 : left Click or 48 = 16 + 32 Left-Click + in a ROI
+		for (i=0; i<size; i++){
+			xpoints[i] = xcenter + xoffset[i]; // x-coordinates
+			ypoints[i] = ycenter + yoffset[i]; // y-coordinates
+		}
+		
+		if (isLine) makeSelection("polyline", xpoints, ypoints);
+		else makeSelection("polygon", xpoints, ypoints);
+		
+		roiManager("Add");
+	}
+}
