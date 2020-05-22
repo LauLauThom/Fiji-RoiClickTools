@@ -367,26 +367,36 @@ macro "Ellipse Click Tool Options" {
 // ----------------- Custom Line Tool ---------- //
 var xoffset = newArray(50,50);
 var yoffset = newArray(100,100);
-var isLine;
+var type;
 
 macro "Update custom ROI Click Action Tool - C037D06D15D16D24D25D26D27D28D29D2aD33D34D35D36D37D3bD3cD42D43D44D45D46D47D48D4cD4dDb1Db2Db6Db7Db8Db9DbaDbbDbcDc2Dc3Dc7Dc8Dc9DcaDcbDd4Dd5Dd6Dd7Dd8Dd9DdaDe8De9Df8CabcD05D14D17D18D19D1aD23D2bD2cD32D3dD41D51D52D53D54D55D56D57D58Da6Da7Da8Da9DaaDabDacDadDbdDc1DccDd2Dd3DdbDe4De5De6De7DeaDf9"{
 	// this macro "save" the current Roi upon click on the toolbar icon
 	
-	isLine = is("line");
+	type = selectionType();
+	if (type==-1) exit("Draw or activate a ROI first"); // No roi defined
 	
 	// Compute center of line or polygon as center of bounding-box
 	Roi.getBounds(x, y, width, height);
 	xcenter = x+width/2;
 	ycenter = y+height/2;
 	
-	// Get roi coordinates and compute coordinates compared to bbox-center
-	Roi.getCoordinates(xpoints, ypoints);
-	size = Roi.size();
-	xoffset = newArray(size);
-	yoffset = newArray(size);
-	for (i=0; i<size; i++){
-		xoffset[i] = xpoints[i] - xcenter;
-		yoffset[i] = ypoints[i] - ycenter;
+	if ( (type==0) || (type==1) ){ // Rectangle or Oval
+		xoffset = newArray(1); // single top-left corner point
+		yoffset = newArray(1);
+		xoffset[0] = x - xcenter;
+		yoffset[0] = y - ycenter;
+	}
+	
+	else{
+		// Get roi coordinates and compute coordinates compared to bbox-center
+		Roi.getCoordinates(xpoints, ypoints);
+		size = Roi.size();
+		xoffset = newArray(size); // offset compared to center
+		yoffset = newArray(size);
+		for (i=0; i<size; i++){
+			xoffset[i] = xpoints[i] - xcenter;
+			yoffset[i] = ypoints[i] - ycenter;
+		}
 	}
 }
 
@@ -407,8 +417,16 @@ macro "Custom ROI Click Tool - Cf00T0d15RT8c12oTfc12i" {
 			ypoints[i] = ycenter + yoffset[i]; // y-coordinates
 		}
 		
-		if (isLine) makeSelection("polyline", xpoints, ypoints);
+		if (type==0) makeRectangle(xpoints[0], ypoints[0], width, height);
+		else if (type==1) makeOval(xpoints[0], ypoints[0], width, height);
+		else if (type==2) makeSelection("polygon", xpoints, ypoints);
+		else if (type==3) makeSelection("freehand", xpoints, ypoints);
+		else if (type==5) makeLine(xpoints[0], ypoints[0], xpoints[1], ypoints[1]);
+		else if (type==6) makeSelection("polyline", xpoints, ypoints);
+		else if (type==7) makeSelection("freeline", xpoints, ypoints);
+		else if (type==8) makeSelection("angle", xpoints, ypoints);
 		else makeSelection("polygon", xpoints, ypoints);
+
 
 	defaultActions();
 	}
