@@ -364,7 +364,7 @@ var xoffset = newArray(50,50);
 var yoffset = newArray(100,100);
 var isLine;
 
-macro "Update custom ROI Action Tool - C037D06D15D16D24D25D26D27D28D29D2aD33D34D35D36D37D3bD3cD42D43D44D45D46D47D48D4cD4dDb1Db2Db6Db7Db8Db9DbaDbbDbcDc2Dc3Dc7Dc8Dc9DcaDcbDd4Dd5Dd6Dd7Dd8Dd9DdaDe8De9Df8CabcD05D14D17D18D19D1aD23D2bD2cD32D3dD41D51D52D53D54D55D56D57D58Da6Da7Da8Da9DaaDabDacDadDbdDc1DccDd2Dd3DdbDe4De5De6De7DeaDf9"{
+macro "Update custom ROI Click Action Tool - C037D06D15D16D24D25D26D27D28D29D2aD33D34D35D36D37D3bD3cD42D43D44D45D46D47D48D4cD4dDb1Db2Db6Db7Db8Db9DbaDbbDbcDc2Dc3Dc7Dc8Dc9DcaDcbDd4Dd5Dd6Dd7Dd8Dd9DdaDe8De9Df8CabcD05D14D17D18D19D1aD23D2bD2cD32D3dD41D51D52D53D54D55D56D57D58Da6Da7Da8Da9DaaDabDacDadDbdDc1DccDd2Dd3DdbDe4De5De6De7DeaDf9"{
 	// this macro "save" the current Roi upon click on the toolbar icon
 	
 	isLine = is("line");
@@ -386,7 +386,7 @@ macro "Update custom ROI Action Tool - C037D06D15D16D24D25D26D27D28D29D2aD33D34D
 }
 
 
-macro "Custom ROI Tool - Cf00T0d15RT8c12oTfc12i" {
+macro "Custom ROI Click Tool - Cf00T0d15RT8c12oTfc12i" {
 	roiManager("Associate", "true"); // associate ROI with slice
 	roiManager("Show All with labels");	
 	
@@ -404,10 +404,19 @@ macro "Custom ROI Tool - Cf00T0d15RT8c12oTfc12i" {
 		
 		if (isLine) makeSelection("polyline", xpoints, ypoints);
 		else makeSelection("polygon", xpoints, ypoints);
-		
-		roiManager("Add");
+
+	defaultActions();
 	}
 }
+
+macro "Custom ROI Click Tool Options" {
+	Dialog.create("Custom ROI Click Tool options");
+	addDefaultOption();
+	Dialog.show();
+	
+	getDefaultOptions(); //Update the global variables addToManager, runMeasure, nextSlice 
+}
+
 
 macro "Online documentation and source code Action Tool - C06bD2bD42D4bD5bD5cD6cD6dD7dD8dD9dDabDacDadDbbDbcDcbDdaC001D09D12D7fD8fDe2DedDf7Df8C08cD27D35D36D45D46D57D67D6bD93D9bD9cDa2Da3Db4Db5Db6C000D06D2eD60D6fD90Dd1Df6Df9C07cD33D38D3bD48D58D68D69Db8Dc8Dd6Dd7C046D15D1aD2cD51D5eD6eD7eD8eD9eDa1DaeDe5De6De8De9DeaC5adD55D64D74D76D78D7aD7cD84D86D87D8aD8cD94D99Da5Da7Da8C07bD39D3aD49D4aD4cD59D5aD5dD6aD9aDa9DaaDb9DbaDc9DcaDd5Dd8Dd9C023D14D1bD23D32D3dD41D4eDb1Dc2DcdDd3DdcDe4DebC09dD25D26D34D43D44D52D53D54D62D63D72D73D82D83D92Da4C08cD28D29D2aD37D47D77Db3Db7Dc4Dc5Dc6Dc7C059D16D17D18D19D4dD61D91Db2DbdDccDd4DdbDe7CcefD56D65D66D75D79D7bD85D88D89D8bD95D96D97D98Da6C07aD24D3cD71D81Dc3C011D07D08D1dD70D80Dbe"{
 	exec("open", "https://github.com/LauLauThom/Fiji-RoiClickTools")
