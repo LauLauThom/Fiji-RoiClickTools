@@ -37,6 +37,9 @@ Instead of defining the dimensions, the custom ROI tool allows to generate ROI f
 This is particularly convenient for freehand and polygon ROI.  
 To define the model ROI, draw a ROI, then click the `Update custom ROI tool` button.  
 Then select the custom ROI tool, and use it like the others 1-clik tools to generate new ROI based on this model.   
+<img src="https://github.com/LauLauThom/RoiClicTool/blob/master/Image/customRoi.gif" width="400" height="400">
+
+
 
 ### - Custom macro command
 Using the "custom macro command" field, any additional action can be executed upon click.  
