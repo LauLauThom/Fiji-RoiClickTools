@@ -364,7 +364,7 @@ macro "Ellipse Click Tool Options" {
 
 
 // ----------------- Custom ROI Tool ---------- //
-var xoffset = newArray(1);
+var xoffset = newArray(1); // single point init to 0
 var yoffset = newArray(1);
 var type=0;
 var width=200;
