@@ -381,7 +381,7 @@ macro "Update custom ROI Click Action Tool - C037D06D15D16D24D25D26D27D28D29D2aD
 	
 	// Get roi coordinates and compute coordinates compared to bbox-center
 	Roi.getCoordinates(xpoints, ypoints);
-	size = Roi.size()
+	size = Roi.size();
 	xoffset = newArray(size);
 	yoffset = newArray(size);
 	for (i=0; i<size; i++){
