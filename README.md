@@ -13,8 +13,10 @@ If the option are selected, the generated ROI is added to the Roi Manager, the c
 In Fiji, simply activate the *ROI 1-click tools* update site.  
 In ImageJ, copy the file "Roi 1-Click Tools.ijm" to the folder *ImageJ\macros\toolsets*. 
 
+To display the toolbar, click the `>>` on the right side of the ImageJ toolbar, and select the ROI 1-click tools entry.
+
 ## Configuration
-Double-click on the ROI icon to configure the shape and options.
+Double-click on any of the ROI 1-click tool icon to configure the shape and options.
 
 <img src="https://github.com/LauLauThom/RoiClicTool/blob/master/Image/Options.JPG" alt="Options" width="300" height="250">
 
@@ -29,6 +31,12 @@ Using the 1-click circle tool, one can rapidly measure the average intensity for
 ### - Rectangle tool
 Same for the quantification of bands in gels using the 1-click rectangle tool.
 <img src="https://github.com/LauLauThom/RoiClicTool/blob/master/Image/Gel.png" alt="Gel" width="650" height="350">
+
+### Custom ROI tool
+Instead of defining the dimensions, the custom ROI tool allows to generate ROI from an existing model ROI.  
+This is particularly convenient for freehand and polygon ROI.  
+To define the model ROI, draw a ROI, then click the `Update custom ROI tool` button.  
+Then select the custom ROI tool, and use it like the others 1-clik tools to generate new ROI based on this model.   
 
 ### - Custom macro command
 Using the "custom macro command" field, any additional action can be executed upon click.  
