@@ -56,6 +56,12 @@ function goNextSlice(){
 	Stack.getDimensions(stackWidth, stackHeight, channels, slices, frames);
 	if ((slices>1) && (nextSlice)) run("Next Slice [>]");
 }
+function roiActions(){
+	if (addToManager){
+		roiManager("Associate", "true"); // associate ROI with slice
+		roiManager("Show All with labels");	
+	}
+}
 
 /* Add default option to dialog */
 function addDefaultOption(){
