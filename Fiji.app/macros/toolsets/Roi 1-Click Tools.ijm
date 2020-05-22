@@ -1,11 +1,16 @@
 /* This macro should be placed in the ImageJ>macro>toolsets folder so as to appear in the toolbar >> section
-* This Click tool creates predefined ROI centered on the point of the Click, add this ROI to the ROI manager and run a measurement in this ROI. 
+* These Click tools creates predefined ROI centered on the point of the Click, add the ROI to the ROI manager and measure features selected in "Analyze > Set Measurements" for this ROI. 
 * With stacks it goes automatically to the next slice.
-* The dimensions of the ROI can be set by right clicking or double clicking on the tool icon  
-* The choice of measurements should be set in the Analyse > Set Measurements... prior to the successive Click 
-* The best is to set the options "Associate ROI with slices" of the ROI manager (More>Options)  
+* The dimensions of the ROI can be set by right clicking or double clicking on the tool icon.
+* Alternatively one can also use a currently active ROI instead of specifying dimensions, this is useful for freehand and polygon. 
+* To do so, activate a roi and click the "Update custom ROI click tool", then select the custom ROI click tool (red ROI button) to generate the "saved roi"
 * The ROI set and measurement table should be manually saved after use.   
 *
+* About the code:
+* - 1 macro Tool per click tool
+* - 1 associated Option macro (identical name) to set the tool options by right click
+* - Tools share common parameters define in get/addDefaultOptions (nextSlice, measure..)
+* - Update custom ROI and Help button are Action Tool
 * This code is under BSD-2 licence.
 * Author: Laurent Thomas
 */
