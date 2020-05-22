@@ -135,8 +135,6 @@ var lineLength  = 50;
 var lineAngle  = 45; // trigo orientation
  
 macro "Line Click Tool - Cf00Lff11" {
-	roiManager("Associate", "true"); // associate ROI with slice
-	roiManager("Show All with labels");	
 	
 	getCursorLoc(xcenter, ycenter, z, flags); 
 	//print("Sample: "+x+" "+y); 
@@ -147,7 +145,8 @@ macro "Line Click Tool - Cf00Lff11" {
 		
 		x2 = xcenter + cos(PI/180 * lineAngle) * lineLength/2;
 		y2 = ycenter - sin(PI/180 * lineAngle) * lineLength/2;
-
+		
+		roiActions();
 		makeLine(x1, y1, x2, y2);
 		
 		defaultActions();
@@ -181,15 +180,13 @@ macro "Line Click Tool Options" {
 var radius = 20; 
 
 macro "Circle Click Tool - Cf00O11cc" {
-	roiManager("Associate", "true"); // associate ROI with slice
-	roiManager("Show All with labels");	
 	
 	getCursorLoc(x, y, z, flags); 
 	//print("Sample: "+x+" "+y); 
 
 	if ((flags==16)|(flags == 48)){ 					  // 16 : left Click or 48 = 16 + 32 Left-Click + in a ROI
+		roiActions();
 		makeOval(x-radius, y-radius, 2*radius, 2*radius); // Draw the circle of given radius using the points from ROI manager as center
-		
 		defaultActions();
 	}
 }	
@@ -269,8 +266,6 @@ var rotRectHeight = 20;
 var rotRectAngle  = 0; // trigo orientation
  
 macro "Rotated Rectangle Click Tool - Cf00R11cc" {
-	roiManager("Associate", "true"); // associate ROI with slice
-	roiManager("Show All with labels");	
 	
 	getCursorLoc(xcenter, ycenter, z, flags); 
 	//print("Sample: "+x+" "+y); 
@@ -281,9 +276,9 @@ macro "Rotated Rectangle Click Tool - Cf00R11cc" {
 		
 		x2 = xcenter + cos(PI/180 * rotRectAngle) * rotRectWidth/2;
 		y2 = ycenter - sin(PI/180 * rotRectAngle) * rotRectWidth/2;
-
-		makeRotatedRectangle(x1, y1, x2, y2, rotRectHeight);
 		
+		roiActions();
+		makeRotatedRectangle(x1, y1, x2, y2, rotRectHeight);
 		defaultActions();
 	}
 }	
@@ -324,8 +319,6 @@ var ellipseHeight = 20;
 var ellipseAngle  = 0; // trigo orientation
  
 macro "Ellipse Click Tool - Cf00O11fa" {
-	roiManager("Associate", "true"); // associate ROI with slice
-	roiManager("Show All with labels");	
 	
 	getCursorLoc(xcenter, ycenter, z, flags); 
 	//print("Sample: "+x+" "+y); 
@@ -336,9 +329,9 @@ macro "Ellipse Click Tool - Cf00O11fa" {
 		
 		x2 = xcenter + cos(PI/180 * ellipseAngle) * ellipseWidth/2;
 		y2 = ycenter - sin(PI/180 * ellipseAngle) * ellipseWidth/2;
-
-		makeEllipse(x1, y1, x2, y2, ellipseHeight/ellipseWidth);
 		
+		roiActions();
+		makeEllipse(x1, y1, x2, y2, ellipseHeight/ellipseWidth);
 		defaultActions();
 	}
 }	
@@ -370,10 +363,12 @@ macro "Ellipse Click Tool Options" {
 }
 
 
-// ----------------- Custom Line Tool ---------- //
-var xoffset = newArray(50,50);
-var yoffset = newArray(100,100);
-var type;
+// ----------------- Custom ROI Tool ---------- //
+var xoffset = newArray(1);
+var yoffset = newArray(1);
+var type=0;
+var width=200;
+var height=200;
 
 macro "Update custom ROI Click Action Tool - C037D06D15D16D24D25D26D27D28D29D2aD33D34D35D36D37D3bD3cD42D43D44D45D46D47D48D4cD4dDb1Db2Db6Db7Db8Db9DbaDbbDbcDc2Dc3Dc7Dc8Dc9DcaDcbDd4Dd5Dd6Dd7Dd8Dd9DdaDe8De9Df8CabcD05D14D17D18D19D1aD23D2bD2cD32D3dD41D51D52D53D54D55D56D57D58Da6Da7Da8Da9DaaDabDacDadDbdDc1DccDd2Dd3DdbDe4De5De6De7DeaDf9"{
 	// this macro "save" the current Roi upon click on the toolbar icon
@@ -408,8 +403,6 @@ macro "Update custom ROI Click Action Tool - C037D06D15D16D24D25D26D27D28D29D2aD
 
 
 macro "Custom ROI Click Tool - Cf00T0d15RT8c12oTfc12i" {
-	roiManager("Associate", "true"); // associate ROI with slice
-	roiManager("Show All with labels");	
 	
 	getCursorLoc(xcenter, ycenter, z, flags); 
 	
@@ -418,6 +411,8 @@ macro "Custom ROI Click Tool - Cf00T0d15RT8c12oTfc12i" {
 	ypoints = newArray(size); 
 	
 	if ((flags==16)|(flags == 48)){  // 16 : left Click or 48 = 16 + 32 Left-Click + in a ROI
+		roiActions();
+		
 		for (i=0; i<size; i++){
 			xpoints[i] = xcenter + xoffset[i]; // x-coordinates
 			ypoints[i] = ycenter + yoffset[i]; // y-coordinates
