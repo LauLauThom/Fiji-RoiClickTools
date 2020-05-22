@@ -1,4 +1,3 @@
-[![DOI](https://zenodo.org/badge/DOI/10.17912/micropub.biology.000215.svg)](https://doi.org/10.17912/micropub.biology.000215)
 ![Twitter Follow](https://img.shields.io/twitter/follow/LauLauThom?style=social)
 
 # ImageJ/Fiji Roi 1-Click Tool
@@ -63,7 +62,7 @@ The key and the set of commands can be edited at the beginning of the source cod
 		// ADD CUSTOM COMMANDS HERE
 		run("Images to Stack", "name=Stack title=[] use");
 		run("Make Montage...", "columns=5 rows=1 scale=1");
-}
+	}
 
 ## Credits
 If you use those tools please cite  
