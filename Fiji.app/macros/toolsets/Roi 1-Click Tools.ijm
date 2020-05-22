@@ -370,7 +370,7 @@ var type=0;
 var width=200;
 var height=200;
 
-macro "Update custom ROI Click Action Tool - C037D06D15D16D24D25D26D27D28D29D2aD33D34D35D36D37D3bD3cD42D43D44D45D46D47D48D4cD4dDb1Db2Db6Db7Db8Db9DbaDbbDbcDc2Dc3Dc7Dc8Dc9DcaDcbDd4Dd5Dd6Dd7Dd8Dd9DdaDe8De9Df8CabcD05D14D17D18D19D1aD23D2bD2cD32D3dD41D51D52D53D54D55D56D57D58Da6Da7Da8Da9DaaDabDacDadDbdDc1DccDd2Dd3DdbDe4De5De6De7DeaDf9"{
+macro "Update custom ROI Click Action Tool - C070D06D15D16D24D25D26D27D28D29D2aD33D34D35D36D37D3bD3cD42D43D44D45D46D47D48D4cD4dDb1Db2Db6Db7Db8Db9DbaDbbDbcDc2Dc3Dc7Dc8Dc9DcaDcbDd4Dd5Dd6Dd7Dd8Dd9DdaDe8De9Df8CabcD05D14D17D18D19D1aD23D2bD2cD32D3dD41D51D52D53D54D55D56D57D58Da6Da7Da8Da9DaaDabDacDadDbdDc1DccDd2Dd3DdbDe4De5De6De7DeaDf9"{
 	// this macro "save" the current Roi upon click on the toolbar icon
 	
 	type = selectionType();
@@ -402,7 +402,7 @@ macro "Update custom ROI Click Action Tool - C037D06D15D16D24D25D26D27D28D29D2aD
 }
 
 
-macro "Custom ROI Click Tool - Cf00T0d15RT8c12oTfc12i" {
+macro "Custom ROI Click Tool - C070T0d15RT8c12oTfc12i" {
 	
 	getCursorLoc(xcenter, ycenter, z, flags); 
 	
