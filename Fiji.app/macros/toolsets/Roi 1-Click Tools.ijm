@@ -72,7 +72,8 @@ function addDefaultOption(){
 	nextSlice    = call("ij.Prefs.get", "default.nextSlice", nextSlice);
 	doExtraCmd   = call("ij.Prefs.get", "default.doExtraCmd", doExtraCmd);
 	extraCmd     = call("ij.Prefs.get", "default.extraCmd", extraCmd);
-
+	
+	Dialog.addNumber("Current ROI group (or use keypad shorcut)", Roi.getDefaultGroup());
 	Dialog.addCheckbox("Add to Roi Manager", addToManager);
 	Dialog.addCheckbox("Run measure", runMeasure );
 	Dialog.addCheckbox("Auto-Next slice", nextSlice);
@@ -86,6 +87,9 @@ function addDefaultOption(){
 
 /* Recover default options from dialog */
 function getDefaultOptions(){
+	roiGroup = Dialog.getNumber();
+	Roi.setDefaultGroup(roiGroup);
+	
 	addToManager = Dialog.getCheckbox();
 	runMeasure   = Dialog.getCheckbox();
 	nextSlice    = Dialog.getCheckbox();
