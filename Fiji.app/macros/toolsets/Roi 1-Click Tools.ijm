@@ -40,8 +40,13 @@ macro "Custom shortcut [1]" {
   macro "Numeric Pad 9 [n9]" { npad(9); }
 
   function npad(digit) {
-      Roi.setDefaultGroup(digit);
-      showStatus("Set default Roi group to: " + digit);
+      if  (IJ.getFullVersion()>="1.52t"){
+		Roi.setDefaultGroup(digit);
+		showStatus("Set default Roi group to: " + digit);
+	  }
+	  else {
+		requires("1.52t");
+	  }
   }
 
 // ----------- Helper functions -----------------//
@@ -73,7 +78,7 @@ function addDefaultOption(){
 	doExtraCmd   = call("ij.Prefs.get", "default.doExtraCmd", doExtraCmd);
 	extraCmd     = call("ij.Prefs.get", "default.extraCmd", extraCmd);
 	
-	Dialog.addNumber("Current ROI group (or use keypad shorcut)", Roi.getDefaultGroup());
+	if (IJ.getFullVersion()>="1.52t") Dialog.addNumber("Current ROI group (or use keypad shorcut)", Roi.getDefaultGroup());
 	Dialog.addCheckbox("Add to Roi Manager", addToManager);
 	Dialog.addCheckbox("Run measure", runMeasure );
 	Dialog.addCheckbox("Auto-Next slice", nextSlice);
@@ -87,8 +92,10 @@ function addDefaultOption(){
 
 /* Recover default options from dialog */
 function getDefaultOptions(){
-	roiGroup = Dialog.getNumber();
-	Roi.setDefaultGroup(roiGroup);
+	if  (IJ.getFullVersion()>="1.52t"){
+		roiGroup = Dialog.getNumber();
+		Roi.setDefaultGroup(roiGroup);
+	}
 	
 	addToManager = Dialog.getCheckbox();
 	runMeasure   = Dialog.getCheckbox();
