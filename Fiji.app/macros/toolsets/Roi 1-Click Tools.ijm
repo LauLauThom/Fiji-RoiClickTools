@@ -63,7 +63,7 @@ function goNextSlice(){
 }
 function roiActions(){
 	if (addToManager){
-		roiManager("Associate", "true"); // associate ROI with slice
+		roiManager("Associate", "true"); // associate ROI with slice (this does not set the Roi position though)
 		roiManager("Show All with labels");	
 	}
 }
@@ -113,6 +113,7 @@ function getDefaultOptions(){
 /* Default actions, in this order: AddToManager, runMeasure, nextSlice, customAction and select None  */
 // Issue with stack and extra command crop : if NextSlice then crop, wrong 
 function defaultActions(){
+	if (nSlices>1) Roi.setPosition(getSliceNumber()); // important otherwise the roi have position None
 	if (addToManager) roiManager("Add");
 	if (runMeasure)   run("Measure");
 	
