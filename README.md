@@ -13,7 +13,9 @@ If the option are selected, the generated ROI is added to the Roi Manager, the c
 In Fiji, simply activate the *ROI 1-click tools* update site.  
 In ImageJ, copy the file "Roi 1-Click Tools.ijm" to the folder *ImageJ\macros\toolsets*. 
 
-To display the toolbar, click the `>>` on the right side of the ImageJ toolbar, and select the ROI 1-click tools entry.
+To display the toolbar, click the `>>` on the right side of the ImageJ toolbar, and select the ROI 1-click tools entry.  
+
+__N.B__: For optimal functioning, the macro toolset requires ImageJ >= 1.52r.
 
 ## Configuration
 Double-click on any of the ROI 1-click tool icon to configure the shape and options.
