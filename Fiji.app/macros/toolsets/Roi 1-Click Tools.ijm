@@ -113,7 +113,11 @@ function getDefaultOptions(){
 /* Default actions, in this order: AddToManager, runMeasure, nextSlice, customAction and select None  */
 // Issue with stack and extra command crop : if NextSlice then crop, wrong 
 function defaultActions(){
-	if (nSlices>1) Roi.setPosition(getSliceNumber()); // important otherwise the roi have position None
+	if (nSlices>1){
+			Stack.getPosition(channel, slice, frame);
+			if (IJ.getFullVersion()<"1.52r") showMessage("The ROI slice-position is not saved when annotating stacks with this version of ImageJ, update to min 1.52r");
+			else Roi.setPosition(channel, slice, frame); // important otherwise the roi have position None
+	}
 	if (addToManager) roiManager("Add");
 	if (runMeasure)   run("Measure");
 	
