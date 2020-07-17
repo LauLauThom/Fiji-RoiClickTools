@@ -287,15 +287,28 @@ macro "Rotated Rectangle Click Tool - Cf00R11cc" {
 	//print("Sample: "+x+" "+y); 
 
 	if ((flags==16)|(flags == 48)){  // 16 : left Click or 48 = 16 + 32 Left-Click + in a ROI
-		x1 = xcenter - cos(PI/180 * rotRectAngle) * rotRectWidth/2;
-		y1 = ycenter + sin(PI/180 * rotRectAngle) * rotRectWidth/2;
 		
-		x2 = xcenter + cos(PI/180 * rotRectAngle) * rotRectWidth/2;
-		y2 = ycenter - sin(PI/180 * rotRectAngle) * rotRectWidth/2;
+		if (rotRectAngle==0){
+			xcorner = xcenter - rotRectWidth/2;
+			ycorner = ycenter - rotRectHeight/2;
+			
+			roiActions();
+			makeRectangle(xcorner, ycorner, rotRectWidth, rotRectHeight);
+			defaultActions();
+		}
 		
-		roiActions();
-		makeRotatedRectangle(x1, y1, x2, y2, rotRectHeight);
-		defaultActions();
+		else{
+			
+			x1 = xcenter - cos(PI/180 * rotRectAngle) * rotRectWidth/2;
+			y1 = ycenter + sin(PI/180 * rotRectAngle) * rotRectWidth/2;
+			
+			x2 = xcenter + cos(PI/180 * rotRectAngle) * rotRectWidth/2;
+			y2 = ycenter - sin(PI/180 * rotRectAngle) * rotRectWidth/2;
+			
+			roiActions();
+			makeRotatedRectangle(x1, y1, x2, y2, rotRectHeight);
+			defaultActions();
+		}
 	}
 }	
 
