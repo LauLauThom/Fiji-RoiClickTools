@@ -23,7 +23,8 @@ Double-click on any of the ROI 1-click tool icon to configure the shape and opti
 
 <img src="https://github.com/LauLauThom/RoiClicTool/blob/master/Image/Options.JPG" alt="Options" width="300" height="250">
 
-## Video tutorial
+## Video tutorial  
+Playlist on [YouTube](https://www.youtube.com/playlist?list=PLbBgXlYof3_aEXBmXkkuLyQ78aVj_xdan)  
 [![Tuto](https://img.youtube.com/vi/ZPS78T_-gUs/0.jpg)](https://www.youtube.com/watch?v=ZPS78T_-gUs) 
 
 ## Examples
