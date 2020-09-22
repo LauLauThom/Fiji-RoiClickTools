@@ -161,7 +161,7 @@ function defaultActions(){
 // -------------- Line  --------------- //
 
 // Initalize variables (global such that the option macro can change it)
-var lineLength  = 50;
+var lineLength  = 100;
 var lineAngle  = 45; // trigo orientation
  
 macro "Line Click Tool - Cf00Lff11" {
@@ -207,7 +207,7 @@ macro "Line Click Tool Options" {
 
 
 // -------------------- Circle ---------------- //
-var radius = 20; 
+var radius = 50; 
 
 macro "Circle Click Tool - Cf00O11cc" {
 	
@@ -292,8 +292,8 @@ macro "Rectangle Click Tool Options" {
 // -------------- Rotated Rectangle --------------- //
 
 // Initalize variables (global such that the option macro can change it)
-var rotRectWidth  = 40;
-var rotRectHeight = 20;
+var rotRectWidth  = 100;
+var rotRectHeight = 50;
 var rotRectAngle  = 0; // trigo orientation
  
 macro "Rotated Rectangle Click Tool - Cf00R11cc" {
@@ -360,8 +360,8 @@ macro "Rotated Rectangle Click Tool Options" {
 // -------------- Ellipse  --------------- //
 
 // Initalize variables (global such that the option macro can change it)
-var ellipseWidth  = 50;
-var ellipseHeight = 20;
+var ellipseWidth  = 100;
+var ellipseHeight = 50;
 var ellipseAngle  = 0; // trigo orientation
  
 macro "Ellipse Click Tool - Cf00O11fa" {
