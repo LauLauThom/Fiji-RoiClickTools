@@ -56,6 +56,7 @@ var runMeasure = true;
 var nextSlice = true;
 var doExtraCmd = false;
 var extraCmd = "run('Duplicate...', 'title=crop');";
+var leftButton = 16;
 
 function goNextSlice(){
 	Stack.getDimensions(stackWidth, stackHeight, channels, slices, frames);
@@ -66,6 +67,19 @@ function roiActions(){
 		roiManager("Associate", "true"); // associate ROI with slice (this does not set the Roi position though)
 		roiManager("Show All with labels");	
 	}
+}
+
+/* Move the ROI, as long as the left click is maintained.*/
+function moveRoi(){
+	
+	Roi.getBounds(x, y, width, height) // rectangular bounding box
+	getCursorLoc(xcenter, ycenter, z, flags);
+	
+	while (flags&leftButton!=0) {
+		Roi.move(xcenter-width/2, ycenter-height/2); // the top leftpixel of the bounding rectangle is used to position the ROI with move
+		wait(25);
+		getCursorLoc(xcenter, ycenter, z, flags);
+		}
 }
 
 /* Add default option to dialog */
@@ -164,7 +178,7 @@ macro "Line Click Tool - Cf00Lff11" {
 		
 		roiActions();
 		makeLine(x1, y1, x2, y2);
-		
+		moveRoi();
 		defaultActions();
 	}
 }	
@@ -203,6 +217,7 @@ macro "Circle Click Tool - Cf00O11cc" {
 	if ((flags==16)|(flags == 48)){ 					  // 16 : left Click or 48 = 16 + 32 Left-Click + in a ROI
 		roiActions();
 		makeOval(x-radius, y-radius, 2*radius, 2*radius); // Draw the circle of given radius using the points from ROI manager as center
+		moveRoi();
 		defaultActions();
 	}
 }	
@@ -294,6 +309,7 @@ macro "Rotated Rectangle Click Tool - Cf00R11cc" {
 			
 			roiActions();
 			makeRectangle(xcorner, ycorner, rotRectWidth, rotRectHeight);
+			moveRoi();
 			defaultActions();
 		}
 		
@@ -307,6 +323,7 @@ macro "Rotated Rectangle Click Tool - Cf00R11cc" {
 			
 			roiActions();
 			makeRotatedRectangle(x1, y1, x2, y2, rotRectHeight);
+			moveRoi();
 			defaultActions();
 		}
 	}
@@ -361,6 +378,7 @@ macro "Ellipse Click Tool - Cf00O11fa" {
 		
 		roiActions();
 		makeEllipse(x1, y1, x2, y2, ellipseHeight/ellipseWidth);
+		moveRoi();
 		defaultActions();
 	}
 }	
@@ -456,9 +474,9 @@ macro "Custom ROI Click Tool - C070T0d15RT8c12oTfc12i" {
 		else if (type==7) makeSelection("freeline", xpoints, ypoints);
 		else if (type==8) makeSelection("angle", xpoints, ypoints);
 		else makeSelection("polygon", xpoints, ypoints);
-
-
-	defaultActions();
+		
+		moveRoi();
+		defaultActions();
 	}
 }
 
