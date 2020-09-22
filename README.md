@@ -7,7 +7,8 @@
 Toolset that offers additional toolbar ROI tools, with predefined custom ROI shapes.
 
 Using the 1-Click ROI, clicking on an image generates a predefined ROI, centered on the clicked point.  
-If the option are selected, the generated ROI is added to the Roi Manager, the command "run Measure" is run for the selected region and if a stack is used, the next image is displayed. 
+If the option are selected, the generated ROI is added to the Roi Manager, the command _run Measure_ is run for the selected region and if a stack is used, the next image is displayed.  
+With the latest version, maintaining the left click pressed allows to preview the roi and to move it around. The roi is "validated" once the click released.
 
 ## Installation
 In Fiji, simply activate the *ROI 1-click tools* update site.  
