@@ -86,3 +86,17 @@ If you use those tools please cite
 ImageJ/Fiji ROI 1-click tools for rapid manual image annotations and measurements  
 microPublication Biology. 
 DOI: [10.17912/micropub.biology.000215](https://doi.org/10.17912/micropub.biology.000215)*
+
+Download the citation as a bib file from the journal website, [here](https://www.micropublication.org/citations?type=bibtex&id=8620)  
+or copy/paste this to a .bib file
+
+```
+@misc{https://doi.org/10.17912/micropub.biology.000215,
+  doi = {10.17912/micropub.biology.000215},
+  url = {https://www.micropublication.org/journals/biology/micropub-biology-000215/},
+  author = {Thomas, Laurent SV and Gehrig, Jochen},
+  title = {ImageJ/Fiji ROI 1-click tools for rapid manual image annotations and measurements},
+  journal = {microPublication Biology},
+  year = {2020}
+}
+```
