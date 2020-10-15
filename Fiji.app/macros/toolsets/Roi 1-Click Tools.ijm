@@ -92,12 +92,12 @@ function addDefaultOption(){
 	doExtraCmd   = call("ij.Prefs.get", "default.doExtraCmd", doExtraCmd);
 	extraCmd     = call("ij.Prefs.get", "default.extraCmd", extraCmd);
 	
-	if (IJ.getFullVersion()>="1.52t") Dialog.addNumber("Current ROI group (or use keypad shorcut)", Roi.getDefaultGroup());
+	if (IJ.getFullVersion()>="1.52t") Dialog.addNumber("Current ROI group (or use keypad shortcut)", Roi.getDefaultGroup());
 	Dialog.addCheckbox("Add to Roi Manager", addToManager);
 	Dialog.addCheckbox("Run measure", runMeasure );
 	Dialog.addCheckbox("Auto-Next slice", nextSlice);
-	Dialog.addCheckbox("Run extra custom commands", doExtraCmd);
-	Dialog.addString("Custom macro commands", extraCmd, 25);
+	Dialog.addCheckbox("Run custom macro-commands", doExtraCmd);
+	Dialog.addString("Custom macro-commands", extraCmd, 25);
 	
 	Dialog.addHelp("https://github.com/LauLauThom/Fiji-RoiClickTools");
 	Dialog.addMessage("If you use these tools, please cite:\nThomas, LS; Gehrig, J (2020)\nImageJ/Fiji ROI 1-click tools for rapid manual image annotations and measurements\nmicroPublication Biology - 10.17912/micropub.biology.000215");
