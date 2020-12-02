@@ -9,7 +9,7 @@
 * About the code:
 * - 1 macro Tool per click tool
 * - 1 associated Option macro (identical name) to set the tool options by right click
-* - Tools share common parameters define in get/addDefaultOptions (nextSlice, measure..)
+* - Tools share common parameters define in get/addDefaultOptions (doNextSlice, measure..)
 * - Update custom ROI and Help button are Action Tool
 * This code is under BSD-2 licence.
 * Author: Laurent Thomas
@@ -51,17 +51,32 @@ macro "Custom shortcut [1]" {
 
 // ----------- Helper functions -----------------//
 
+// Global variables
 var addToManager = true;
 var runMeasure = true;
-var nextSlice = true;
+var doNextSlice = true;
+var dimension = "time"; //default scrolling dimension for next-slice
 var doExtraCmd = false;
 var extraCmd = "run('Duplicate...', 'title=crop');";
 var leftButton = 16;
 
 function goNextSlice(){
 	Stack.getDimensions(stackWidth, stackHeight, channels, slices, frames);
-	if ((slices>1) && (nextSlice)) run("Next Slice [>]");
+	
+	if (slices>1) {
+		
+		if (Stack.isHyperstack){
+			Stack.getPosition(channel, slice, frame);
+			
+			// Update slide position accordingly (no issue if new value above mex slider position)
+			if (dimension=="time") Stack.setFrame(frame+1);
+			else if (dimension=="channel") Stack.setChannel(channel+1);
+			else if (dimension=="Z-slice") Stack.setSlice(slice+1);
+		} 
+		else run("Next Slice [>]"); // for 1D stack
+	}
 }
+
 function roiActions(){
 	if (addToManager){
 		roiManager("Associate", "true"); // associate ROI with slice (this does not set the Roi position though)
@@ -88,14 +103,19 @@ function addDefaultOption(){
 	// Recover previous parameters
 	addToManager = call("ij.Prefs.get", "default.addToManager", addToManager);
 	runMeasure   = call("ij.Prefs.get", "default.runMeasure", runMeasure);
-	nextSlice    = call("ij.Prefs.get", "default.nextSlice", nextSlice);
+	doNextSlice  = call("ij.Prefs.get", "default.doNextSlice", doNextSlice);
+	dimension    = call("ij.Prefs.get", "default.dimension", dimension);
 	doExtraCmd   = call("ij.Prefs.get", "default.doExtraCmd", doExtraCmd);
 	extraCmd     = call("ij.Prefs.get", "default.extraCmd", extraCmd);
 	
 	if (IJ.getFullVersion()>="1.52t") Dialog.addNumber("Current ROI group (or use keypad shortcut)", Roi.getDefaultGroup());
 	Dialog.addCheckbox("Add to Roi Manager", addToManager);
 	Dialog.addCheckbox("Run measure", runMeasure );
-	Dialog.addCheckbox("Auto-Next slice", nextSlice);
+	
+	Dialog.addCheckbox("Auto-Next slice", doNextSlice);
+	Dialog.addToSameRow();
+	Dialog.addChoice("Dimension (for hyperstacks)", newArray("time","channel","Z-slice"), dimension );
+	
 	Dialog.addCheckbox("Run custom macro-commands", doExtraCmd);
 	Dialog.addString("Custom macro-commands", extraCmd, 25);
 	
@@ -113,18 +133,20 @@ function getDefaultOptions(){
 	
 	addToManager = Dialog.getCheckbox();
 	runMeasure   = Dialog.getCheckbox();
-	nextSlice    = Dialog.getCheckbox();
+	doNextSlice  = Dialog.getCheckbox();
+	dimension    = Dialog.getChoice();
 	doExtraCmd   = Dialog.getCheckbox();
 	extraCmd     = Dialog.getString(); 
 	
 	call("ij.Prefs.set", "default.addToManager", addToManager);
 	call("ij.Prefs.set", "default.runMeasure", runMeasure);
-	call("ij.Prefs.set", "default.nextSlice", nextSlice);
+	call("ij.Prefs.set", "default.doNextSlice", doNextSlice);
+	call("ij.Prefs.set", "default.dimension", dimension);
 	call("ij.Prefs.set", "default.doExtraCmd", doExtraCmd);
 	call("ij.Prefs.set", "default.extraCmd", extraCmd);
 }
 
-/* Default actions, in this order: AddToManager, runMeasure, nextSlice, customAction and select None  */
+/* Default actions, in this order: AddToManager, runMeasure, doNextSlice, customAction and select None  */
 // Issue with stack and extra command crop : if NextSlice then crop, wrong 
 function defaultActions(){
 	if (nSlices>1){
@@ -147,7 +169,7 @@ function defaultActions(){
 	
 	selectImage(imageName); // select back initial image, before calling next slice
 	
-	goNextSlice();    // only if nextSlice is True
+	if (doNextSlice) goNextSlice();    // only if doNextSlice is True
 	//run("Select None"); // Deselect last drawn ROI - commented: if not adding to ROI Manager then ROI not visible at all !
 
 }
@@ -198,7 +220,7 @@ macro "Line Click Tool Options" {
 	
 	lineLength  = Dialog.getNumber();
 	lineAngle   = Dialog.getNumber();
-	getDefaultOptions(); //Update the global variables addToManager, runMeasure, nextSlice 
+	getDefaultOptions(); //Update the global variables addToManager, runMeasure, doNextSlice 
 
 	// Save entered value
 	call("ij.Prefs.set", "line.length", lineLength);
@@ -233,7 +255,7 @@ macro "Circle Click Tool Options" {
    Dialog.show();
    
    radius = Dialog.getNumber();
-   getDefaultOptions(); //Update the global variables addToManager, runMeasure, nextSlice 
+   getDefaultOptions(); //Update the global variables addToManager, runMeasure, doNextSlice 
    
    // Save typed value
    	call("ij.Prefs.set", "circle.radius", radius);
@@ -347,7 +369,7 @@ macro "Rotated Rectangle Click Tool Options" {
 	rotRectWidth  = Dialog.getNumber();
 	rotRectHeight = Dialog.getNumber();
 	rotRectAngle  = Dialog.getNumber();
-	getDefaultOptions(); //Update the global variables addToManager, runMeasure, nextSlice 
+	getDefaultOptions(); //Update the global variables addToManager, runMeasure, doNextSlice 
 	
 	// Save entered variables
 	call("ij.Prefs.set", "rect.width", rotRectWidth);
@@ -401,7 +423,7 @@ macro "Ellipse Click Tool Options" {
 	ellipseWidth  = Dialog.getNumber();
 	ellipseHeight = Dialog.getNumber();
 	ellipseAngle  = Dialog.getNumber();
-	getDefaultOptions(); //Update the global variables addToManager, runMeasure, nextSlice 
+	getDefaultOptions(); //Update the global variables addToManager, runMeasure, doNextSlice 
 	
 	// Save entered values
 	call("ij.Prefs.set", "ellipse.width", ellipseWidth);
@@ -485,7 +507,7 @@ macro "Custom ROI Click Tool Options" {
 	addDefaultOption();
 	Dialog.show();
 	
-	getDefaultOptions(); //Update the global variables addToManager, runMeasure, nextSlice 
+	getDefaultOptions(); //Update the global variables addToManager, runMeasure, doNextSlice 
 }
 
 
