@@ -12,6 +12,8 @@ With the latest version, maintaining the left click pressed allows to preview th
 
 ## Installation
 In Fiji, simply activate the *ROI 1-click tools* update site.  
+See how to [activate an update site](https://imagej.net/How_to_follow_a_3rd_party_update_site).  
+
 In ImageJ, copy the file "Roi 1-Click Tools.ijm" to the folder *ImageJ\macros\toolsets*. 
 
 To display the toolbar, click the `>>` on the right side of the ImageJ toolbar, and select the ROI 1-click tools entry.  
